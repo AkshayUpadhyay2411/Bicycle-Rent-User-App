@@ -8,8 +8,8 @@ exports.returnRequest = async (req,res) => {
     //     // user : data
     // });
 
-    console.log( "Hi!!");
-    console.log("Hello !!" + req.body);
+    // console.log( "Hi!!");
+    // console.log("Hello !!" + req.body);
 
     // const { 
     //     title,
@@ -71,7 +71,7 @@ exports.returnRequest = async (req,res) => {
 
 exports.getReturnRequest = (req,res) => {  
     
-    ReturnRequest.find({})
+    ReturnRequest.find({ isResolved : false  })
     .exec( ( error , returnRequests ) => {
 
         if (error) return res.status(400).json({ error });

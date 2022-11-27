@@ -137,7 +137,3 @@ exports.declineRequest = (req , res) => {
 }
 
 
-exports.returnRequest = (req , res) => {
-    console.log(req.body);   
-    
-}

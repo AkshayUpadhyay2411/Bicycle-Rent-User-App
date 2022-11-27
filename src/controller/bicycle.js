@@ -49,7 +49,7 @@ exports.createBicycle = (req,res) => {
 
 exports.getBicycle = (req,res) => {  
     
-    Bicycle.find({})
+    Bicycle.find({ isRequested : false })
     .exec( ( error , bicycles ) => {
         console.log(bicycles);
 
@@ -57,6 +57,20 @@ exports.getBicycle = (req,res) => {
 
         if (bicycles) {
             return res.status(200).json( { bicycles } );
+        }
+    });
+}
+
+exports.getRequestedBicycle = (req,res) => {  
+    
+    Bicycle.find({ requestedBy : req.user._id })
+    .exec( ( error , requestedBicycles ) => {
+        console.log(requestedBicycles);
+
+        if (error) return res.status(400).json({ error });
+
+        if (requestedBicycles) {
+            return res.status(200).json( { requestedBicycles } );
         }
     });
 }
