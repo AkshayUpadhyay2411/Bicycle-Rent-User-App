@@ -58,14 +58,27 @@ exports.returnRequest = async (req,res) => {
         if (data) {
             console.log(data);
 
-            return res.status(200).json({
-                message : "Return Request created successfully !"
-                // user : data
-            });
+            // return res.status(200).json({
+            //     message : "Return Request created successfully !"
+            //     // user : data
+            // });
         }
 
     });
 
+    Bicycle.findByIdAndUpdate( { _id : req.body.bicycleId } , { isReturnRequested : true } ). 
+    exec( (error , result) => {
+        if (error) return res.status(400).json({ error });
+
+        if (result) {
+            console.log(result);
+        }
+    } );
+
+    return res.status(200).json({
+        message : "Return Request created successfully !"
+        // user : data
+    });
 }
 
 
@@ -124,6 +137,17 @@ exports.declineReturnRequest = (req , res) => {
             console.log(result);
         }
     } );
+
+    Bicycle.findByIdAndUpdate( { _id : req.body.bicycleId } , { isReturnRequested : false } ). 
+    exec( (error , result) => {
+        if (error) return res.status(400).json({ error });
+
+        if (result) {
+            console.log(Hello);
+        }
+    } );
+
+   
 
     // Bicycle.findByIdAndUpdate( { _id : req.body.bicycleId } , { isRequested : false , requestedBy : null} ). 
     // exec( (error , result) => {
